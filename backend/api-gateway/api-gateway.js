@@ -7,9 +7,9 @@ app.use(logger('dev'));
 
 function selectProxyHost(req) {
     if (req.path.startsWith('/parametros'))
-        return 'http://localhost:8080/';
+        return 'http://ip:8080/';
     else if (req.path.startsWith('/logging'))
-        return 'http://localhost:8090/';
+        return 'http://ip:8090/';
     else return null;
 }
 
@@ -21,6 +21,6 @@ app.use((req, res, next) => {
         httpProxy(proxyHost)(req, res, next);
 });
 
-app.listen(8000, () => {
+app.listen(8000, '0.0.0.0', () => {
     console.log('API Gateway iniciado!');
 });
